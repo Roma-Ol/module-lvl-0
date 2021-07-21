@@ -1,0 +1,4 @@
+romaroma.form:
+  path: 'romaroma/guestbook'
+  defaults:
+    _form: '\Drupal\romaroma\Controller\MainPageController';
