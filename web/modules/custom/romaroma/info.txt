@@ -1,0 +1,6 @@
+next time u'll need to create  twig template and render the table and form
+via twig in order to place it correctly and make user- friendly styling.
+- delete table in Firstpagecontroller and get it via twig.
+- the same things u should do w/ form.
+- add default values to input.
+-

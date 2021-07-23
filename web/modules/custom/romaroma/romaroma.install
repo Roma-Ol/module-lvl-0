@@ -1,0 +1,61 @@
+<?php
+function romaroma_schema() {
+  $schema['guestbook'] = [
+    'description' => 'It stores user`s info',
+    'fields'      => [
+      'id'         => [
+        'description' => 'feeback id',
+        'type'        => 'serial',
+        'not null'    => TRUE,
+      ],
+      'name'       => [
+        'type'     => 'varchar',
+        'length'   => '101',
+        'description' => 'user`s name',
+        'not null' => FALSE,
+      ],
+      'mail'       => [
+        'description' => 'user`s email',
+        'type'        => 'varchar',
+        'not null'    => FALSE,
+        'default'     => '',
+        'length'      => 64,
+      ],
+      'phone'      => [
+        'description' => 'user`s phone num',
+        'type'        => 'varchar',
+        'not null'    => FALSE,
+        'length'      => 64,
+      ],
+      'feedback'   => [
+        'description' => 'User`s feedback',
+        'type'        => 'text',
+        'not null'    => FALSE,
+        'length'      => 9999,
+      ],
+      'profilePic' => [
+        'description' => 'user`s profile pic',
+        'type'        => 'int',
+        'not null'    => TRUE,
+        'default'     => 0,
+        'length'      => 64,
+      ],
+      'respondPic' => [
+        'description' => 'user`s feedback img',
+        'type'        => 'int',
+        'not null'    => TRUE,
+        'default'     => 0,
+        'length'      => 64,
+      ],
+      'created'    => [
+        'description' => 'creation time',
+        'type'        => 'varchar',
+        'not null'    => FALSE,
+        'default'     => '',
+        'length'      => 64,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+  return $schema;
+}

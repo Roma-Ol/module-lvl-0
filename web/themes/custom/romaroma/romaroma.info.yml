@@ -22,4 +22,3 @@ regions:
 
 libraries-extend:
   bootstrap/framework:
-    - romaroma/framework

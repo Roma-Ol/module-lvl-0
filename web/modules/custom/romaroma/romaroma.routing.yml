@@ -1,4 +1,6 @@
 romaroma.form:
-  path: 'romaroma/guestbook'
+  path: '/romaroma/guestbook'
   defaults:
-    _form: '\Drupal\romaroma\Controller\MainPageController';
+    _controller: '\Drupal\romaroma\Controller\FirstPageController::report'
+  requirements:
+    _permission: 'access content'
