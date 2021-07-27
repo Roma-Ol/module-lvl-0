@@ -1,0 +1,22 @@
+uuid: e63e76a7-456e-4e87-9c24-d8bc8e6fb347
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - romaroma_theme
+_core:
+  default_config_hash: 8I8iACSa0sKO3k3jlvUG1ge52rfcKX7USJAQYnzuBgg
+id: romaroma_theme_help
+theme: romaroma_theme
+region: content
+weight: -30
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: '0'
+visibility: {  }

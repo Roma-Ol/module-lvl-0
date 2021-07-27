@@ -198,28 +198,31 @@ class FormMain extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    // Insert data to DB.
+    // Inserting the profile picture into DB.
     $form_state->setUserInput([]);
-    $image       = $form_state->getValue('profilePic');
+    $profilePic = $form_state->getValue('profilePic');
+    $profilePic = File::load($profilePic[0]);
+    $profilePic->setPermanent();
+    $profilePic->save();
+
+    // Inserting the feedback picture into DB.
     $respondPic  = $form_state->getValue('feedbackPic');
-    $file        = File::load($image[0]);
     $fileRespond = File::load($respondPic[0]);
-    $file->setPermanent();
     $fileRespond->setPermanent();
-    $file->save();
     $fileRespond->save();
+
     $value = $this->getDestinationArray();
     $let   = $value["destination"];
 
     $data = \Drupal::service('database')->insert('guestbook')
       ->fields([
-        'name'       => $form_state->getValue('name'),
-        'mail'       => $form_state->getValue('email'),
-        'phone'      => $form_state->getValue('phone'),
-        'feedback'   => $form_state->getValue('feedback'),
-        'profilePic' => $form_state->getValue('profilePic')[0],
+        'name'        => $form_state->getValue('name'),
+        'mail'        => $form_state->getValue('email'),
+        'phone'       => $form_state->getValue('phone'),
+        'feedback'    => $form_state->getValue('feedback'),
+        'profilePic'  => $form_state->getValue('profilePic')[0],
         'feedbackPic' => $form_state->getValue('feedbackPic')[0],
-        'created'    => date('d - m - Y H:i:s', time()),
+        'created'     => date('d - m - Y H:i:s', time()),
       ])
       ->execute();
     // Successful submit message.

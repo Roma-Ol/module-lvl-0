@@ -1,0 +1,20 @@
+uuid: 011d1bce-93e3-4844-b5a4-d31f1cc21d20
+langcode: en
+status: true
+dependencies:
+  theme:
+    - romaroma_theme
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: romaroma_theme_local_actions
+theme: romaroma_theme
+region: content
+weight: -20
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

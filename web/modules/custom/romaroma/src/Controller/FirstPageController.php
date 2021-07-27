@@ -43,10 +43,18 @@ class FirstPageController extends ControllerBase {
   public function load() {
     $query  = \Drupal::database();
     $result = $query->select('guestbook', 'g')
-      ->fields('g', ['id', 'name', 'mail', 'phone', 'feedback', 'created', 'profilePic', 'feedbackPic'])
+      ->fields('g', [
+        'id',
+        'name',
+        'mail',
+        'phone',
+        'feedback',
+        'created',
+        'profilePic',
+        'feedbackPic',
+      ])
       ->orderBy('created', 'DESC')
       ->execute()->fetchAll(\PDO::FETCH_OBJ);
-    $data   = [];
 
     return $result;
   }
@@ -56,53 +64,59 @@ class FirstPageController extends ControllerBase {
    */
   public function report() {
     $result = $this->load();
-    // Creating a rows, where every row is a seperate feeback.
 
-    $data = [];
     foreach ($result as $row) {
-      $data[$row->id] = [
-        //        $row->id,
-        $row->name,
-        $row->mail,
-        $row->feedback,
-        $row->created,
-        [
-          'data' => [
-            '#theme'      => 'image',
-            '#alt'        => 'catImg',
-            '#uri'        => File::load($row->profilePic)->getFileUri(),
-            '#width'      => 100,
-          ],
-        ],
-        [
-          'data' => [
-            '#theme'      => 'image',
-            '#alt'        => 'catImg',
-            '#uri'        => File::load($row->feedbackPic)->getFileUri(),
-            '#width'      => 100,
-          ],
-        ],
+
+      // Getting the profile picture info.
+      $profilePic = file::load($row->profilePic);
+      $profilePicUri = $profilePic->getFileUri();
+      $profilePicVariable = [
+        '#theme' => 'image',
+        '#uri' => $profilePicUri,
+        '#alt' => 'Profile picture',
+        '#title' => 'Profile picture',
+        '#width' => 150,
+      ];
+
+      // Getting the profile picture info.
+      $feedbackPic = file::load($row->feedbackPic);
+      $feedbackPicUri = $feedbackPic->getFileUri();
+      $feedbackPicVariable = [
+        '#theme' => 'image',
+        '#uri' => $feedbackPicUri,
+        '#alt' => 'Feedback picture',
+        '#title' => 'Feedback picture',
+        '#width' => 150,
       ];
     }
 
-    // Creating headings for our table.
-    $header = [
-      t('name'), t('email'), t('feedback'), t('created'),
+    // Putting all the data we need into one variable.
+    $data[] = [
+      'name' => $row->name,
+      'mail' => $row->mail,
+      'phone' => $row->phone,
+      'feedback' => $row->feedback,
+      'created' => $row->created,
+      'profilePic' => [
+        'data' => $profilePicVariable,
+      ],
+      'feedbackPic' => [
+        'data' => $feedbackPicVariable,
+      ],
     ];
 
     // Building the form.
-    $form = $this->build();
+    $form          = $this->build();
     $build['form'] = $form;
 
-    // Building the table from DB.
-    $build['table'] = [
-      '#type' => 'table',
-      '#header' => $header,
-      '#rows' => $data,
+    // Rendering the data we need.
+    return [
+      'form' => $form,
+      'guest_list' => [
+        '#theme'   => 'guest_list',
+        '#content' => $data,
+      ],
     ];
-
-    // Rendering the above things.
-    return $build;
   }
 
 }

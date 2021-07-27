@@ -1,0 +1,41 @@
+<div class="guestbook-page-wrapper">
+    <div class="form">
+        {{ form }}
+    </div>
+
+    {% for i in content %}
+    <div class="db-table-content">
+        <div class="profile-author-info-block">
+            <div class="profile-pic">
+                {{ i.profilePic }}
+            </div>
+            <div class="profile-info">
+                <div class="profile-user-name">
+                    {{ 'Guest name: '|trans }} {{ i.name }}
+                </div>
+                <div class="profile-user-email">
+                    {{ 'Guest email: '|trans }}
+                    <a href="mailto:{{ i.mail }}">{{ i.mail }}</a>
+                </div>
+                <div class="profile-user-phone-number">
+                    {{ 'Guest phone number: '|trans }}
+                    <a href="tel:{{ i.phone }}">{{ i.phone }}</a>
+                </div>
+            </div>
+        </div>
+        <div class="profile-feedback-block">
+            <div class="feedback-content">
+                <div class="feedback-text">
+                    {{ i.feedback }}
+                </div>
+                <div class="feedbackPic">
+                    {{ i.feedbackPic }}
+                </div>
+                <div class="feedback-date">
+                    {{ 'Publication date: '|trans }} {{ i.created }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
