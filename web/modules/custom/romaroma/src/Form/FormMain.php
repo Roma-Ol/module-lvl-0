@@ -200,12 +200,16 @@ class FormMain extends FormBase {
 
     // Insert data to DB.
     $form_state->setUserInput([]);
-    $image = $form_state->getValue('profilePic');
-    $file  = File::load($image[0]);
+    $image       = $form_state->getValue('profilePic');
+    $respondPic  = $form_state->getValue('feedbackPic');
+    $file        = File::load($image[0]);
+    $fileRespond = File::load($respondPic[0]);
     $file->setPermanent();
+    $fileRespond->setPermanent();
     $file->save();
+    $fileRespond->save();
     $value = $this->getDestinationArray();
-    $let = $value["destination"];
+    $let   = $value["destination"];
 
     $data = \Drupal::service('database')->insert('guestbook')
       ->fields([
@@ -214,7 +218,7 @@ class FormMain extends FormBase {
         'phone'      => $form_state->getValue('phone'),
         'feedback'   => $form_state->getValue('feedback'),
         'profilePic' => $form_state->getValue('profilePic')[0],
-        // 'respondPic' => $form_state->getValue('respondPic')[0],
+        'feedbackPic' => $form_state->getValue('feedbackPic')[0],
         'created'    => date('d - m - Y H:i:s', time()),
       ])
       ->execute();

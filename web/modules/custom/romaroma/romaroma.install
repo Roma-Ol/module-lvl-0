@@ -40,7 +40,7 @@ function romaroma_schema() {
         'default'     => 0,
         'length'      => 64,
       ],
-      'respondPic' => [
+      'feedbackPic' => [
         'description' => 'user`s feedback img',
         'type'        => 'int',
         'not null'    => TRUE,

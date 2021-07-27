@@ -1,6 +1,3 @@
-schemas:
-  bootstrap: 8000
-  romaroma: 8000
 favicon:
   mimetype: image/vnd.microsoft.icon
   path: ''
@@ -15,3 +12,6 @@ logo:
   path: ''
   url: ''
   use_default: true
+schemas:
+  bootstrap: 8000
+  romaroma: 8000

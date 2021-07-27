@@ -3,6 +3,7 @@
 namespace Drupal\romaroma\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\file\Entity\File;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -42,7 +43,7 @@ class FirstPageController extends ControllerBase {
   public function load() {
     $query  = \Drupal::database();
     $result = $query->select('guestbook', 'g')
-      ->fields('g', ['id', 'name', 'mail', 'phone', 'feedback', 'created'])
+      ->fields('g', ['id', 'name', 'mail', 'phone', 'feedback', 'created', 'profilePic', 'feedbackPic'])
       ->orderBy('created', 'DESC')
       ->execute()->fetchAll(\PDO::FETCH_OBJ);
     $data   = [];
@@ -56,13 +57,31 @@ class FirstPageController extends ControllerBase {
   public function report() {
     $result = $this->load();
     // Creating a rows, where every row is a seperate feeback.
+
+    $data = [];
     foreach ($result as $row) {
       $data[$row->id] = [
-//        $row->id,
+        //        $row->id,
         $row->name,
         $row->mail,
         $row->feedback,
         $row->created,
+        [
+          'data' => [
+            '#theme'      => 'image',
+            '#alt'        => 'catImg',
+            '#uri'        => File::load($row->profilePic)->getFileUri(),
+            '#width'      => 100,
+          ],
+        ],
+        [
+          'data' => [
+            '#theme'      => 'image',
+            '#alt'        => 'catImg',
+            '#uri'        => File::load($row->feedbackPic)->getFileUri(),
+            '#width'      => 100,
+          ],
+        ],
       ];
     }
 
