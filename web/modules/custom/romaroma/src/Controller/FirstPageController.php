@@ -65,6 +65,7 @@ class FirstPageController extends ControllerBase {
   public function report() {
     $result = $this->load();
 
+
     foreach ($result as $row) {
 
       // Getting the profile picture info.
@@ -88,22 +89,23 @@ class FirstPageController extends ControllerBase {
         '#title' => 'Feedback picture',
         '#width' => 150,
       ];
+
+      // Putting all the data we need into one variable.
+      $data[] = [
+        'name' => $row->name,
+        'mail' => $row->mail,
+        'phone' => $row->phone,
+        'feedback' => $row->feedback,
+        'created' => $row->created,
+        'profilePic' => [
+          'data' => $profilePicVariable,
+        ],
+        'feedbackPic' => [
+          'data' => $feedbackPicVariable,
+        ],
+      ];
     }
 
-    // Putting all the data we need into one variable.
-    $data[] = [
-      'name' => $row->name,
-      'mail' => $row->mail,
-      'phone' => $row->phone,
-      'feedback' => $row->feedback,
-      'created' => $row->created,
-      'profilePic' => [
-        'data' => $profilePicVariable,
-      ],
-      'feedbackPic' => [
-        'data' => $feedbackPicVariable,
-      ],
-    ];
 
     // Building the form.
     $form          = $this->build();
