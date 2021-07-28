@@ -1,13 +1,24 @@
+{{ attach_library('romaroma/romaroma-style') }}
 <div class="guestbook-page-wrapper">
-    <div class="form">
-        {{ form }}
+    <div class="form-wrapper-first">
+        <div class="form-wrapper-second">
+            {{ form }}
+        </div>
     </div>
 
     {% for i in content %}
     <div class="db-table-content">
         <div class="profile-author-info-block">
             <div class="profile-pic">
-                {{ i.profilePic }}
+                {% if i.profilePic.data %}
+                    <div class="profile-image">
+                        {{ i.profilePic }}
+                    </div>
+                {% else %}
+                    <div class="default-image">
+                        <img src="/modules/custom/romaroma/media/defaultImage.jpg" alt="xz">
+                    </div>
+                {% endif %}
             </div>
             <div class="profile-info">
                 <div class="profile-user-name">
@@ -37,5 +48,6 @@
             </div>
         </div>
     </div>
+        <hr>
     {% endfor %}
 </div>

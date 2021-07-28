@@ -1,0 +1,16 @@
+.guestbook-page-wrapper{
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 15px;
+  .form-wrapper-first{
+    border-radius: 15px;
+    padding: 1px;
+    background: rgb(60,255,146);
+    background: radial-gradient(circle, rgba(60,255,146,1) 0%, rgba(193,255,68,1) 10%, rgba(44,255,241,1) 20%, rgba(217,255,0,1) 30%, rgba(9,255,254,1) 40%, rgba(68,214,83,1) 50%, rgba(203,255,177,1) 60%, rgba(6,239,255,1) 70%, rgba(124,255,197,1) 80%, rgba(108,233,74,1) 90%);
+    .form-wrapper-second{
+      border-radius: 15px;
+      background: white;
+      padding: 15px;
+    }
+  }
+}

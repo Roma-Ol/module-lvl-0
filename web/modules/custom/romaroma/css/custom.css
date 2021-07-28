@@ -1,0 +1,18 @@
+.guestbook-page-wrapper {
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 15px;
+}
+.guestbook-page-wrapper .form-wrapper-first {
+  border-radius: 15px;
+  padding: 1px;
+  background: #3cff92;
+  background: radial-gradient(circle, #3cff92 0%, #c1ff44 10%, #2cfff1 20%, #d9ff00 30%, #09fffe 40%, #44d653 50%, #cbffb1 60%, #06efff 70%, #7cffc5 80%, #6ce94a 90%);
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second {
+  border-radius: 15px;
+  background: white;
+  padding: 15px;
+}
+
+/*# sourceMappingURL=custom.css.map */

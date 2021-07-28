@@ -82,6 +82,11 @@ class FormMain extends FormBase {
       '#placeholder' => t('Tell us what u think'),
       '#required'    => TRUE,
     ];
+    $form['zal']                   = [
+      '#type'   => 'markup',
+      '#prefix' => '<div class="zzz">',
+      '#class'  => 'zzzz',
+    ];
     $form['profilePic']            = [
       '#type'              => 'managed_file',
       '#title'             => t('Your profile pic'),
@@ -101,6 +106,10 @@ class FormMain extends FormBase {
         'file_validate_size'       => [5242880],
       ],
       '#upload_location'   => 'public://romaroma/',
+    ];
+    $form['upa']                   = [
+      '#type'   => 'markup',
+      '#suffix' => '</div>',
     ];
     $form['submit']                = [
       '#type'  => 'submit',
@@ -140,7 +149,7 @@ class FormMain extends FormBase {
   /**
    * Additional AJAX validation.
    *
-   *   * Validation to display inline errors 4 user.
+   * Validation to display inline errors 4 user.
    */
 
   /**
@@ -197,19 +206,32 @@ class FormMain extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-
-    // Inserting the profile picture into DB.
+    $connection = \Drupal::service('database');
     $form_state->setUserInput([]);
+    // Inserting the profile picture into DB.
     $profilePic = $form_state->getValue('profilePic');
-    $profilePic = File::load($profilePic[0]);
-    $profilePic->setPermanent();
-    $profilePic->save();
+
+    if (!($profilePic == NULL)) {
+      $profilePic = File::load($profilePic[0]);
+      $profilePic->setPermanent();
+      $profilePic->save();
+    }
+    else {
+      $form_state->setValue('profilePic', ['0']);
+    }
+
 
     // Inserting the feedback picture into DB.
-    $respondPic  = $form_state->getValue('feedbackPic');
-    $fileRespond = File::load($respondPic[0]);
-    $fileRespond->setPermanent();
-    $fileRespond->save();
+    $feedbackPic = $form_state->getValue('feedbackPic');
+
+    if (!($feedbackPic == NULL)) {
+      $feedbackPic = File::load($feedbackPic[0]);
+      $feedbackPic->setPermanent();
+      $feedbackPic->save();
+    }
+    else {
+      $form_state->setValue('feedbackPic', [0]);
+    }
 
     $value = $this->getDestinationArray();
     $let   = $value["destination"];

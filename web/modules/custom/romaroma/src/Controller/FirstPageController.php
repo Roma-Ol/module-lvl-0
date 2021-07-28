@@ -63,41 +63,49 @@ class FirstPageController extends ControllerBase {
    * Telling what to return.
    */
   public function report() {
+    // Building the form.
+    $form = $this->build();
+
     $result = $this->load();
-
-
     foreach ($result as $row) {
-
       // Getting the profile picture info.
-      $profilePic = file::load($row->profilePic);
-      $profilePicUri = $profilePic->getFileUri();
-      $profilePicVariable = [
-        '#theme' => 'image',
-        '#uri' => $profilePicUri,
-        '#alt' => 'Profile picture',
-        '#title' => 'Profile picture',
-        '#width' => 150,
-      ];
+      $profilePic         = file::load($row->profilePic);
+      $profilePicVariable = [];
+      if (!($profilePic == NULL)) {
+        $profilePicUri      = $profilePic->getFileUri();
+        $profilePicVariable = [
+          '#theme' => 'image',
+          '#uri'   => $profilePicUri,
+          '#alt'   => 'Profile picture',
+          '#title' => 'Profile picture',
+          '#width' => 150,
+          '#height' => 150,
+        ];
+      }
 
-      // Getting the profile picture info.
-      $feedbackPic = file::load($row->feedbackPic);
-      $feedbackPicUri = $feedbackPic->getFileUri();
-      $feedbackPicVariable = [
-        '#theme' => 'image',
-        '#uri' => $feedbackPicUri,
-        '#alt' => 'Feedback picture',
-        '#title' => 'Feedback picture',
-        '#width' => 150,
-      ];
+      // Getting the feedback picture info.
+      $feedbackPic         = file::load($row->feedbackPic);
+      $feedbackPicVariable = [];
+      if (!($profilePic == NULL)) {
+        $feedbackPicUri      = $feedbackPic->getFileUri();
+        $feedbackPicVariable = [
+          '#theme' => 'image',
+          '#uri'   => $feedbackPicUri,
+          '#alt'   => 'Feedback picture',
+          '#title' => 'Feedback picture',
+          '#width' => 150,
+          '#height' => 150,
+        ];
+      }
 
       // Putting all the data we need into one variable.
       $data[] = [
-        'name' => $row->name,
-        'mail' => $row->mail,
-        'phone' => $row->phone,
-        'feedback' => $row->feedback,
-        'created' => $row->created,
-        'profilePic' => [
+        'name'        => $row->name,
+        'mail'        => $row->mail,
+        'phone'       => $row->phone,
+        'feedback'    => $row->feedback,
+        'created'     => $row->created,
+        'profilePic'  => [
           'data' => $profilePicVariable,
         ],
         'feedbackPic' => [
@@ -106,19 +114,13 @@ class FirstPageController extends ControllerBase {
       ];
     }
 
-
-    // Building the form.
-    $form          = $this->build();
-    $build['form'] = $form;
-
     // Rendering the data we need.
     return [
-      'form' => $form,
-      'guest_list' => [
-        '#theme'   => 'guest_list',
-        '#content' => $data,
-      ],
+      '#theme'   => 'guest_list',
+      '#form'       => $form,
+      '#content' => $data,
     ];
+
   }
 
 }
