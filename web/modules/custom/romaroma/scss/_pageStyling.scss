@@ -1,0 +1,201 @@
+.guestbook-page-wrapper{
+  font-family: 'Baloo Tammudu 2', cursive;
+  .form-wrapper-first{
+    @include firstBackground;
+    .form-wrapper-second{
+      @include secondBackground;
+      form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .ajax-form-message{
+          p{
+            @include bgRedAnimated;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            font-size: 20px;
+          }
+        }
+        .form-item{
+          .control-label{
+            font-size: 20px;
+            margin-bottom: 0;
+            font-weight: 400;
+            line-height: 1;
+            &::after{
+              display: none;
+            }
+          }
+          .input-group{
+            width: 100%;
+            input{
+              @include inputFields;
+            }
+            .input-group-addon{
+              display: none;
+            }
+          }
+          .form-textarea-wrapper{
+            textarea{
+              @include inputFields;
+            }
+          }
+        }
+        .buttons-wrapper-div{
+          display: flex;
+          justify-content: space-around;
+          .form-group{
+            text-align: center;
+            .form-item{
+              .form-managed-file{
+                input{
+                  @include inputFields;
+                }
+                button{
+                  @include bgRedAnimated;
+                  border: black;
+                  color: black;
+                  transition: 0.5s;
+                  &:hover{
+                    background: #f5cccc;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .submit-wrapper-div{
+          width: 70%;
+          margin: 0 auto;
+          border-radius: 15px;
+          text-transform: uppercase;
+          font-size: 20px;
+          @include bgGreenAnimatedButtonWrapper;
+          button{
+            @include bgGreenAnimatedButton;
+            border-radius: inherit;
+            border: inherit;
+            height: 100%;
+            width: 100%;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 5px;
+            color: black;
+            margin: 0 auto;
+            &:hover{
+              margin-top: -5px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+
+  .table-wrapper-first{
+    margin: 15px 0;
+    @include firstBackground;
+    .table-wrapper-second{
+      @include secondBackground;
+      .db-table-content{
+        display: flex;
+        gap: 15px;
+        .profile-author-info-block{
+          img{
+            margin: 0 auto 15px auto;
+            border-radius: 15px;
+            max-width: 250px;
+          }
+          .profile-info{
+            .profile-info-row{
+              font-size: 15px;
+              @include bgGreenAnimated;
+              padding: 5px;
+              border-radius: 5px;
+              margin-bottom: 10px;
+              a{
+                transition: 0.5s;
+                color: $clr-cyan-dark;
+                &:hover{
+                  text-decoration: none;
+                  color: $clr-cyan;
+                }
+              }
+            }
+            .interact-buttons{
+              margin-top: 30px;
+              .button-wrapper-div{
+                @include bgGreenAnimatedButtonWrapper;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                text-align: center;
+                width: 100%;
+                //transition: 3s;
+                .db-table-button{
+                  @include bgGreenAnimatedButton;
+                  line-height: normal;
+                  transition: 1s;
+                  border-radius: inherit;
+                  width: 100%;
+                  display: block;
+                  color: $clr-cyan-dark;
+                  &:hover{
+                    margin-left: -10px;
+                    text-decoration: none;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .profile-feedback-block{
+          .feedback-text{
+            font-size: 18px;
+            line-height: 1.8;
+            text-align: justify;
+          }
+          .feedbackPic{
+            img{
+              width: 100%;
+              height: 300px;
+              object-fit: cover;
+              border-radius: 15px;
+              margin-bottom: 15px;
+            }
+          }
+          .feedback-date-wrapper{
+            @include bgGreenAnimatedButtonWrapper;
+            padding: 1px;
+            width: max-content;
+            margin-left: auto;
+            border-radius: 15px;
+            .feedback-date{
+              padding: 5px;
+              margin-top: -1px;
+              margin-left: -1px;
+              border-radius: inherit;
+              border-bottom-left-radius: unset;
+              border-top-right-radius: unset;
+              background: white;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

@@ -2,6 +2,8 @@ romaroma-style:
   css:
     theme:
       css/custom.css: {}
+  js:
+    js/romaroma.js: {}
   dependencies:
     - core/jquery #Just to be safe
     - core/drupal.dialog.ajax #Required for dialogs

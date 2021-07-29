@@ -78,8 +78,6 @@ class FirstPageController extends ControllerBase {
           '#uri'   => $profilePicUri,
           '#alt'   => 'Profile picture',
           '#title' => 'Profile picture',
-          '#width' => 150,
-          '#height' => 150,
         ];
       }
 
@@ -93,13 +91,12 @@ class FirstPageController extends ControllerBase {
           '#uri'   => $feedbackPicUri,
           '#alt'   => 'Feedback picture',
           '#title' => 'Feedback picture',
-          '#width' => 150,
-          '#height' => 150,
         ];
       }
 
       // Putting all the data we need into one variable.
       $data[] = [
+        'id'          => $row->id,
         'name'        => $row->name,
         'mail'        => $row->mail,
         'phone'       => $row->phone,
@@ -114,11 +111,15 @@ class FirstPageController extends ControllerBase {
       ];
     }
 
+    $value = $this->getDestinationArray();
+    $let = $value["destination"];
+
     // Rendering the data we need.
     return [
       '#theme'   => 'guest_list',
       '#form'       => $form,
       '#content' => $data,
+      '#getDest' => $let,
     ];
 
   }

@@ -4,3 +4,23 @@ romaroma.form:
     _controller: '\Drupal\romaroma\Controller\FirstPageController::report'
   requirements:
     _permission: 'access content'
+
+romaroma.deleteCat:
+  path: '/romaroma/deleteGuest/{id}'
+  defaults:
+    _form: '\Drupal\romaroma\Form\DeleteGuestForm'
+    _title: 'R U sure u wanna delete this guest?'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: 'TRUE'
+
+romaroma.editGuest:
+  path: '/romaroma/EditGuest/{id}'
+  defaults:
+    _form: '\Drupal\romaroma\Form\EditGuestForm'
+    _title: 'Are you sure u wanna edit this guest?'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: 'TRUE'

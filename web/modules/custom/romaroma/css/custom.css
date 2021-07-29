@@ -1,18 +1,222 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@400;500;600;700&display=swap");
 .guestbook-page-wrapper {
-  border: 1px solid black;
-  border-radius: 15px;
-  padding: 15px;
+  font-family: "Baloo Tammudu 2", cursive;
 }
 .guestbook-page-wrapper .form-wrapper-first {
+  padding: 3px;
   border-radius: 15px;
-  padding: 1px;
-  background: #3cff92;
-  background: radial-gradient(circle, #3cff92 0%, #c1ff44 10%, #2cfff1 20%, #d9ff00 30%, #09fffe 40%, #44d653 50%, #cbffb1 60%, #06efff 70%, #7cffc5 80%, #6ce94a 90%);
 }
 .guestbook-page-wrapper .form-wrapper-first .form-wrapper-second {
-  border-radius: 15px;
-  background: white;
+  border-radius: inherit;
+  background: #fff;
   padding: 15px;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .ajax-form-message p {
+  background: linear-gradient(90deg, rgba(255, 0, 0, 0.1) 10%, rgba(255, 133, 0, 0.1) 30%, rgba(255, 159, 0, 0.1) 50%, rgba(255, 90, 0, 0.1) 70%, rgba(255, 222, 0, 0.1) 90%);
+  background-size: 500% 500%;
+  animation: gradient 15s ease infinite;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .form-item .control-label {
+  font-size: 20px;
+  margin-bottom: 0;
+  font-weight: 400;
+  line-height: 1;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .form-item .control-label::after {
+  display: none;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .form-item .input-group {
+  width: 100%;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .form-item .input-group input {
+  transition: 5s;
+  border-radius: 15px;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .form-item .input-group input:hover, .guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .form-item .input-group input:focus {
+  background: linear-gradient(90deg, rgba(206, 255, 0, 0.1) 10%, rgba(143, 255, 0, 0.1) 30%, rgba(0, 255, 28, 0.1) 50%, rgba(0, 255, 150, 0.1) 70%, rgba(0, 255, 237, 0.1) 90%);
+  background-size: 500% 500%;
+  animation: gradient 15s ease infinite;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .form-item .input-group .input-group-addon {
+  display: none;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .form-item .form-textarea-wrapper textarea {
+  transition: 5s;
+  border-radius: 15px;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .form-item .form-textarea-wrapper textarea:hover, .guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .form-item .form-textarea-wrapper textarea:focus {
+  background: linear-gradient(90deg, rgba(206, 255, 0, 0.1) 10%, rgba(143, 255, 0, 0.1) 30%, rgba(0, 255, 28, 0.1) 50%, rgba(0, 255, 150, 0.1) 70%, rgba(0, 255, 237, 0.1) 90%);
+  background-size: 500% 500%;
+  animation: gradient 15s ease infinite;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .buttons-wrapper-div {
+  display: flex;
+  justify-content: space-around;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .buttons-wrapper-div .form-group {
+  text-align: center;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .buttons-wrapper-div .form-group .form-item .form-managed-file input {
+  transition: 5s;
+  border-radius: 15px;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .buttons-wrapper-div .form-group .form-item .form-managed-file input:hover, .guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .buttons-wrapper-div .form-group .form-item .form-managed-file input:focus {
+  background: linear-gradient(90deg, rgba(206, 255, 0, 0.1) 10%, rgba(143, 255, 0, 0.1) 30%, rgba(0, 255, 28, 0.1) 50%, rgba(0, 255, 150, 0.1) 70%, rgba(0, 255, 237, 0.1) 90%);
+  background-size: 500% 500%;
+  animation: gradient 15s ease infinite;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .buttons-wrapper-div .form-group .form-item .form-managed-file button {
+  background: linear-gradient(90deg, rgba(255, 0, 0, 0.1) 10%, rgba(255, 133, 0, 0.1) 30%, rgba(255, 159, 0, 0.1) 50%, rgba(255, 90, 0, 0.1) 70%, rgba(255, 222, 0, 0.1) 90%);
+  background-size: 500% 500%;
+  animation: gradient 15s ease infinite;
+  border: black;
+  color: black;
+  transition: 0.5s;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .buttons-wrapper-div .form-group .form-item .form-managed-file button:hover {
+  background: #f5cccc;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .submit-wrapper-div {
+  width: 70%;
+  margin: 0 auto;
+  border-radius: 15px;
+  text-transform: uppercase;
+  font-size: 20px;
+  background: linear-gradient(90deg, #e5d372 10%, #a3d068 30%, #589ab8 50%, #a243b6 70%, #cd2372 90%);
+  background-size: 500% 500%;
+  animation: gradient 15s ease infinite;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .submit-wrapper-div button {
+  background: linear-gradient(90deg, #faffe1 10%, #f1ffe2 30%, #95ffcd 50%, #dcfff0 70%, #eee2fc 90%);
+  background-size: 500% 500%;
+  animation: gradient 15s ease infinite;
+  border-radius: inherit;
+  border: inherit;
+  height: 100%;
+  width: 100%;
+  transition: 0.3s;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 5px;
+  color: black;
+  margin: 0 auto;
+}
+.guestbook-page-wrapper .form-wrapper-first .form-wrapper-second form .submit-wrapper-div button:hover {
+  margin-top: -5px;
+}
+.guestbook-page-wrapper .table-wrapper-first {
+  margin: 15px 0;
+  padding: 3px;
+  border-radius: 15px;
+}
+.guestbook-page-wrapper .table-wrapper-first .table-wrapper-second {
+  border-radius: inherit;
+  background: #fff;
+  padding: 15px;
+}
+.guestbook-page-wrapper .table-wrapper-first .table-wrapper-second .db-table-content {
+  display: flex;
+  gap: 15px;
+}
+.guestbook-page-wrapper .table-wrapper-first .table-wrapper-second .db-table-content .profile-author-info-block img {
+  margin: 0 auto 15px auto;
+  border-radius: 15px;
+  max-width: 250px;
+}
+.guestbook-page-wrapper .table-wrapper-first .table-wrapper-second .db-table-content .profile-author-info-block .profile-info .profile-info-row {
+  font-size: 15px;
+  background: linear-gradient(90deg, rgba(206, 255, 0, 0.1) 10%, rgba(143, 255, 0, 0.1) 30%, rgba(0, 255, 28, 0.1) 50%, rgba(0, 255, 150, 0.1) 70%, rgba(0, 255, 237, 0.1) 90%);
+  background-size: 500% 500%;
+  animation: gradient 15s ease infinite;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.guestbook-page-wrapper .table-wrapper-first .table-wrapper-second .db-table-content .profile-author-info-block .profile-info .profile-info-row a {
+  transition: 0.5s;
+  color: #065531;
+}
+.guestbook-page-wrapper .table-wrapper-first .table-wrapper-second .db-table-content .profile-author-info-block .profile-info .profile-info-row a:hover {
+  text-decoration: none;
+  color: #47ee9f;
+}
+.guestbook-page-wrapper .table-wrapper-first .table-wrapper-second .db-table-content .profile-author-info-block .profile-info .interact-buttons {
+  margin-top: 30px;
+}
+.guestbook-page-wrapper .table-wrapper-first .table-wrapper-second .db-table-content .profile-author-info-block .profile-info .interact-buttons .button-wrapper-div {
+  background: linear-gradient(90deg, #e5d372 10%, #a3d068 30%, #589ab8 50%, #a243b6 70%, #cd2372 90%);
+  background-size: 500% 500%;
+  animation: gradient 15s ease infinite;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  text-align: center;
+  width: 100%;
+}
+.guestbook-page-wrapper .table-wrapper-first .table-wrapper-second .db-table-content .profile-author-info-block .profile-info .interact-buttons .button-wrapper-div .db-table-button {
+  background: linear-gradient(90deg, #faffe1 10%, #f1ffe2 30%, #95ffcd 50%, #dcfff0 70%, #eee2fc 90%);
+  background-size: 500% 500%;
+  animation: gradient 15s ease infinite;
+  line-height: normal;
+  transition: 1s;
+  border-radius: inherit;
+  width: 100%;
+  display: block;
+  color: #065531;
+}
+.guestbook-page-wrapper .table-wrapper-first .table-wrapper-second .db-table-content .profile-author-info-block .profile-info .interact-buttons .button-wrapper-div .db-table-button:hover {
+  margin-left: -10px;
+  text-decoration: none;
+}
+.guestbook-page-wrapper .table-wrapper-first .table-wrapper-second .db-table-content .profile-feedback-block .feedback-text {
+  font-size: 18px;
+  line-height: 1.8;
+  text-align: justify;
+}
+.guestbook-page-wrapper .table-wrapper-first .table-wrapper-second .db-table-content .profile-feedback-block .feedbackPic img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+.guestbook-page-wrapper .table-wrapper-first .table-wrapper-second .db-table-content .profile-feedback-block .feedback-date-wrapper {
+  background: linear-gradient(90deg, #e5d372 10%, #a3d068 30%, #589ab8 50%, #a243b6 70%, #cd2372 90%);
+  background-size: 500% 500%;
+  animation: gradient 15s ease infinite;
+  padding: 1px;
+  width: max-content;
+  margin-left: auto;
+  border-radius: 15px;
+}
+.guestbook-page-wrapper .table-wrapper-first .table-wrapper-second .db-table-content .profile-feedback-block .feedback-date-wrapper .feedback-date {
+  padding: 5px;
+  margin-top: -1px;
+  margin-left: -1px;
+  border-radius: inherit;
+  border-bottom-left-radius: unset;
+  border-top-right-radius: unset;
+  background: white;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /*# sourceMappingURL=custom.css.map */

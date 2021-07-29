@@ -6,48 +6,62 @@
         </div>
     </div>
 
-    {% for i in content %}
-    <div class="db-table-content">
-        <div class="profile-author-info-block">
-            <div class="profile-pic">
-                {% if i.profilePic.data %}
-                    <div class="profile-image">
-                        {{ i.profilePic }}
+    <div class="table-wrapper-first">
+        <div class="table-wrapper-second">
+            {% for i in content %}
+                <div class="db-table-content">
+                    <div class="profile-author-info-block">
+                        <div class="profile-pic">
+                            {% if i.profilePic.data %}
+                                    {{ i.profilePic }}
+                            {% else %}
+                                    <img src="/modules/custom/romaroma/media/defaultImage.jpg" alt="xz">
+                            {% endif %}
+                        </div>
+                        <div class="profile-info">
+                            <div class="profile-user-name profile-info-row">
+                                {{ 'Name: '|trans }}
+
+                                {{ i.name }}
+                            </div>
+                            <div class="profile-user-email profile-info-row">
+                                {{ 'Mail: '|trans }}
+
+                                <a href="mailto:{{ i.mail }}">{{ i.mail }}</a>
+                            </div>
+                            <div class="profile-user-phone-number profile-info-row">
+                                {{ 'Tel: '|trans }}
+
+                                <a href="tel:{{ i.phone }}">{{ i.phone }}</a>
+                            </div>
+                            <div class="interact-buttons">
+                                <div class="button-wrapper-div">
+                                    <a href='/romaroma/EditGuest/{{ i.id }}' class="db-table-button db-table-button-edit use-ajax" data-dialog-type="modal">Edit this guest</a>
+                                </div>
+                                <div class="button-wrapper-div">
+                                    <a href='/romaroma/deleteGuest/{{ i.id }}' class="db-table-button db-table-button-delete use-ajax" data-dialog-type="modal">Delete this guest</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                {% else %}
-                    <div class="default-image">
-                        <img src="/modules/custom/romaroma/media/defaultImage.jpg" alt="xz">
+                    <div class="profile-feedback-block">
+                        <div class="feedback-content">
+                            <div class="feedback-text">
+                                {{ i.feedback }}
+                            </div>
+                            <div class="feedbackPic">
+                                {{ i.feedbackPic }}
+                            </div>
+                            <div class="feedback-date-wrapper">
+                                <div class="feedback-date">
+                                    {{ 'Publication date: '|trans }} {{ i.created }}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                {% endif %}
-            </div>
-            <div class="profile-info">
-                <div class="profile-user-name">
-                    {{ 'Guest name: '|trans }} {{ i.name }}
                 </div>
-                <div class="profile-user-email">
-                    {{ 'Guest email: '|trans }}
-                    <a href="mailto:{{ i.mail }}">{{ i.mail }}</a>
-                </div>
-                <div class="profile-user-phone-number">
-                    {{ 'Guest phone number: '|trans }}
-                    <a href="tel:{{ i.phone }}">{{ i.phone }}</a>
-                </div>
-            </div>
-        </div>
-        <div class="profile-feedback-block">
-            <div class="feedback-content">
-                <div class="feedback-text">
-                    {{ i.feedback }}
-                </div>
-                <div class="feedbackPic">
-                    {{ i.feedbackPic }}
-                </div>
-                <div class="feedback-date">
-                    {{ 'Publication date: '|trans }} {{ i.created }}
-                </div>
-            </div>
+                <hr>
+            {% endfor %}
         </div>
     </div>
-        <hr>
-    {% endfor %}
 </div>

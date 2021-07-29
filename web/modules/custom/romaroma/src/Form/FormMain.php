@@ -33,13 +33,13 @@ class FormMain extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form['system_messages']       = [
-      '#markup' => '<div id="form-system-messages"></div>',
+      '#markup' => '<div id="form-system-messages" class="ajax-form-message"></div>',
     ];
     $form['system_messages_email'] = [
-      '#markup' => '<div id="form-email-system-messages"></div>',
+      '#markup' => '<div id="form-email-system-messages" class="ajax-form-message"></div>',
     ];
     $form['system_messages_phone'] = [
-      '#markup' => '<div id="form-phone-system-messages"></div>',
+      '#markup' => '<div id="form-phone-system-messages" class="ajax-form-message"></div>',
     ];
     $form['name']                  = [
       '#type'        => 'textfield',
@@ -66,9 +66,9 @@ class FormMain extends FormBase {
     ];
     $form['phone']                 = [
       '#type'        => 'textfield',
-      '#title'       => t('Phone number'),
+      '#title'       => t('Phone number:'),
       '#description' => $this->t('+XXX XX XXX XX XX'),
-      '#placeholder' => 'Phone number',
+      '#placeholder' => 'Phone number:',
       '#required'    => TRUE,
       '#ajax'        => [
         'callback' => '::validatePhoneAjax',
@@ -77,19 +77,18 @@ class FormMain extends FormBase {
     ];
     $form['feedback']              = [
       '#type'        => 'textarea',
-      '#title'       => t('Feedback'),
+      '#title'       => t('Feedback:'),
       '#description' => $this->t('max: 9999'),
       '#placeholder' => t('Tell us what u think'),
       '#required'    => TRUE,
     ];
     $form['zal']                   = [
       '#type'   => 'markup',
-      '#prefix' => '<div class="zzz">',
-      '#class'  => 'zzzz',
+      '#prefix' => '<div class="buttons-wrapper-div">',
     ];
     $form['profilePic']            = [
       '#type'              => 'managed_file',
-      '#title'             => t('Your profile pic'),
+      '#title'             => t('Your profile pic:'),
       '#description'       => 'jpeg/jpg/png/<2MB',
       '#upload_validators' => [
         'file_validate_extensions' => ['png jpg jpeg'],
@@ -99,8 +98,8 @@ class FormMain extends FormBase {
     ];
     $form['feedbackPic']           = [
       '#type'              => 'managed_file',
-      '#title'             => t('Any photo to share with us?'),
-      '#description'       => 'jpeg/jpg/png/<2MB',
+      '#title'             => t('Any photos to share with us?'),
+      '#description'       => 'jpeg/jpg/png/<5MB',
       '#upload_validators' => [
         'file_validate_extensions' => ['png jpg jpeg'],
         'file_validate_size'       => [5242880],
@@ -111,10 +110,18 @@ class FormMain extends FormBase {
       '#type'   => 'markup',
       '#suffix' => '</div>',
     ];
+    $form['aa']                   = [
+      '#type'   => 'markup',
+      '#prefix' => '<div class="submit-wrapper-div">',
+    ];
     $form['submit']                = [
       '#type'  => 'submit',
       '#name'  => 'submit',
       '#value' => $this->t('Submit'),
+    ];
+    $form['aaa']                   = [
+      '#type'   => 'markup',
+      '#suffix' => '</div>',
     ];
     return $form;
   }
