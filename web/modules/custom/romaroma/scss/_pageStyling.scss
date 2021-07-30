@@ -54,11 +54,11 @@
                 }
                 button{
                   @include bgRedAnimated;
-                  border: black;
-                  color: black;
+                  border: $clr-black;
+                  color: $clr-black;
                   transition: 0.5s;
                   &:hover{
-                    background: #f5cccc;
+                    background: $clr-pink;
                   }
                 }
               }
@@ -82,7 +82,7 @@
             text-transform: uppercase;
             font-weight: 600;
             letter-spacing: 5px;
-            color: black;
+            color: $clr-black;
             margin: 0 auto;
             &:hover{
               margin-top: -5px;
@@ -92,9 +92,6 @@
       }
     }
   }
-
-
-
   .table-wrapper-first{
     margin: 15px 0;
     @include firstBackground;
@@ -152,6 +149,7 @@
           }
         }
         .profile-feedback-block{
+          width: 100%;
           .feedback-text{
             font-size: 18px;
             line-height: 1.8;
@@ -187,6 +185,18 @@
     }
   }
 }
+
+
+@media (max-width: 600px) {
+  .table-wrapper-first{
+    .table-wrapper-second{
+      .db-table-content{
+        display: block;
+      }
+    }
+  }
+}
+
 
 @keyframes gradient {
   0% {

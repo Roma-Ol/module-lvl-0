@@ -2,14 +2,11 @@
 
 namespace Drupal\romaroma\Form;
 
-use Drupal\Core\Ajax\InsertCommand;
-use Drupal\Core\Ajax\RedirectCommand;
+use Drupal\file\Entity\File;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\file\Entity\File;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Class FormMain.
@@ -23,7 +20,7 @@ class EditGuestForm extends FormBase {
   /**
    * ID of the item to edit.
    *
-   * @var.
+   * @var EditGuestForm
    */
 
   protected $id;
@@ -58,17 +55,16 @@ class EditGuestForm extends FormBase {
       ->condition('g.id', $id, '=')
       ->execute()->fetchAll(\PDO::FETCH_OBJ);
 
-    $form['#attached']['library'][] = 'core/drupal.dialog.ajax';
-    $form['system_messages']        = [
+    $form['system_messages']       = [
       '#markup' => '<div id="form-system-messages"></div>',
     ];
-    $form['system_messages_email']  = [
+    $form['system_messages_email'] = [
       '#markup' => '<div id="form-email-system-messages"></div>',
     ];
-    $form['system_messages_phone']  = [
+    $form['system_messages_phone'] = [
       '#markup' => '<div id="form-phone-system-messages"></div>',
     ];
-    $form['name']                   = [
+    $form['name']                  = [
       '#type'          => 'textfield',
       '#title'         => t('Name:'),
       '#description'   => $this->t('А-Я / A-Z / min-2 / max-100'),
@@ -81,7 +77,7 @@ class EditGuestForm extends FormBase {
       ],
       '#suffix'        => '<div class="name-validation-message"></div>',
     ];
-    $form['email']                  = [
+    $form['email']                 = [
       '#type'          => 'email',
       '#title'         => t('Email:'),
       '#description'   => $this->t('allowed values: Aa-Zz / _ / -'),
@@ -90,61 +86,52 @@ class EditGuestForm extends FormBase {
       '#default_value' => $data[0]->mail,
       '#ajax'          => [
         'callback' => '::validateEmailAjax',
-        'event'    => 'change',
+        'event'    => 'keyup',
       ],
     ];
-    $form['phone']                  = [
+    $form['phone']                 = [
       '#type'          => 'textfield',
-      '#title'         => t('Phone number'),
+      '#title'         => t('Phone number:'),
       '#description'   => $this->t('+XXX XX XXX XX XX'),
       '#placeholder'   => 'Phone number',
       '#required'      => TRUE,
       '#default_value' => $data[0]->phone,
       '#ajax'          => [
         'callback' => '::validatePhoneAjax',
-        'event'    => 'change',
+        'event'    => 'keyup',
       ],
     ];
-    $form['feedback']               = [
+    $form['feedback']              = [
       '#type'          => 'textarea',
-      '#title'         => t('Feedback'),
+      '#title'         => t('Feedback:'),
       '#description'   => $this->t('max: 9999'),
       '#placeholder'   => t('Tell us what u think'),
       '#required'      => TRUE,
       '#default_value' => $data[0]->feedback,
     ];
-    $form['zal']                    = [
-      '#type'   => 'markup',
-      '#prefix' => '<div class="zzz">',
-      '#class'  => 'zzzz',
-    ];
-    $form['profilePic']             = [
+    $form['profilePic']            = [
       '#type'              => 'managed_file',
-      '#title'             => t('Your profile pic'),
+      '#title'             => t('Your profile pic:'),
       '#description'       => 'jpeg/jpg/png/<2MB',
-      '#default_value'     => $data[0]->profilePic,
+      '#default_value'     => [$data[0]->profilePic],
       '#upload_validators' => [
         'file_validate_extensions' => ['png jpg jpeg'],
         'file_validate_size'       => [2097152],
       ],
       '#upload_location'   => 'public://romaroma/',
     ];
-    $form['feedbackPic']            = [
+    $form['feedbackPic']           = [
       '#type'              => 'managed_file',
       '#title'             => t('Any photo to share with us?'),
       '#description'       => 'jpeg/jpg/png/<2MB',
-      '#default_value'     => $data[0]->feedbackPic,
+      '#default_value'     => [$data[0]->feedbackPic],
       '#upload_validators' => [
         'file_validate_extensions' => ['png jpg jpeg'],
         'file_validate_size'       => [5242880],
       ],
       '#upload_location'   => 'public://romaroma/',
     ];
-    $form['upa']                    = [
-      '#type'   => 'markup',
-      '#suffix' => '</div>',
-    ];
-    $form['submit']                 = [
+    $form['submit']                = [
       '#type'  => 'submit',
       '#name'  => 'submit',
       '#value' => $this->t('Update'),
@@ -180,10 +167,26 @@ class EditGuestForm extends FormBase {
   }
 
   /**
+   * AJAX name validation.
+   */
+  public function validateNameAjax(array &$form, FormStateInterface $form_state) {
+    $response  = new AjaxResponse();
+    $nameValue = $form_state->getValue('name');
+    if (!preg_match('/^[A-Za-z]*$/', $nameValue) || strlen($nameValue) <= 2
+      || strlen($nameValue) >= 100 || $nameValue = "") {
+      $response->addCommand(new HtmlCommand(
+        '#form-system-messages',
+        '<p class="email-ajax-validation-alert-text">
+                   Budy, ur Name isn`t ok
+                </p>'));
+    }
+    return $response;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $connection = \Drupal::service('database');
     $form_state->setUserInput([]);
     // Inserting the profile picture into DB.
     $profilePic = $form_state->getValue('profilePic');
@@ -212,7 +215,7 @@ class EditGuestForm extends FormBase {
     $value = $this->getDestinationArray();
     $let   = $value["destination"];
 
-    $data = \Drupal::service('database')->update('guestbook')
+    \Drupal::database()->update('guestbook')
       ->condition('id', $this->id)
       ->fields([
         'name'        => $form_state->getValue('name'),
@@ -223,8 +226,9 @@ class EditGuestForm extends FormBase {
         'feedbackPic' => $form_state->getValue('feedbackPic')[0],
       ])
       ->execute();
+
     // Successful submit message.
-    \Drupal::messenger()->addMessage($this->t('Form submitted!Hooray!'),
+    \Drupal::messenger()->addMessage($this->t('Form updated'),
       'status', TRUE);
 
     $form_state->setRedirect('romaroma.form');

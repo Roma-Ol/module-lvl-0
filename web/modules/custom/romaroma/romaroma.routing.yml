@@ -24,3 +24,31 @@ romaroma.editGuest:
     _permission: 'access content'
   options:
     no_cache: 'TRUE'
+
+romaroma.admin_setting:
+  path: '/admin/structure/guestbook'
+  defaults:
+    _form: 'Drupal\romaroma\Controller\AdminPageController'
+    _title: 'RomaRoma module settings'
+  requirements:
+    _permission: 'administer nodes'
+
+romaroma.editGuestAdmin:
+  path: '/admin/structure/editGuest/{id}'
+  defaults:
+    _form: '\Drupal\romaroma\Form\EditFormAdmin'
+    _title: 'R U sure u wanna edit this cuttie?'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: 'TRUE'
+
+romaroma.deleteGuestAdmin:
+  path: '/admin/structure/delete-guest/{id}'
+  defaults:
+    _form: '\Drupal\romaroma\Form\DeleteFormAdmin'
+    _title: 'R U sure u wanna delete this cuttie?'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: 'TRUE'

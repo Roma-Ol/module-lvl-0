@@ -14,7 +14,7 @@ class DeleteGuestForm extends ConfirmFormBase {
   /**
    * ID of the item to delete.
    *
-   * @let
+   * @var DeleteGuestForm
    */
   protected $id;
 
@@ -57,7 +57,7 @@ class DeleteGuestForm extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getQuestion() {
-    return $this->t('Do you want to delete this guest?');
+    return $this->t('Delete this guest?');
   }
 
 }

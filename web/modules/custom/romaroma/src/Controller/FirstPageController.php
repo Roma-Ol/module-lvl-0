@@ -16,7 +16,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class FirstPageController extends ControllerBase {
 
   /**
-   * Do a specific functional.
+   * Do some func.
+   *
+   * @var \Drupal\romaroma\Controller\FirstPageController
    */
   protected $formBuilder;
 
@@ -84,11 +86,10 @@ class FirstPageController extends ControllerBase {
       // Getting the feedback picture info.
       $feedbackPic         = file::load($row->feedbackPic);
       $feedbackPicVariable = [];
-      if (!($profilePic == NULL)) {
-        $feedbackPicUri      = $feedbackPic->getFileUri();
+      if (!($feedbackPic == NULL)) {
         $feedbackPicVariable = [
           '#theme' => 'image',
-          '#uri'   => $feedbackPicUri,
+          '#uri'   => file::load($row->feedbackPic)->getFileUri(),
           '#alt'   => 'Feedback picture',
           '#title' => 'Feedback picture',
         ];

@@ -18,9 +18,11 @@ use Drupal\file\Entity\File;
 class FormMain extends FormBase {
 
   /**
-   * Class FormMain.
+   * Return the id.
    *
-   * {@inheritdoc}.
+   * @return string
+   *
+   *   Returns FormMain ID.
    */
   public function getFormId() {
     return 'ajax_form_submit_example';
@@ -110,7 +112,7 @@ class FormMain extends FormBase {
       '#type'   => 'markup',
       '#suffix' => '</div>',
     ];
-    $form['aa']                   = [
+    $form['aa']                    = [
       '#type'   => 'markup',
       '#prefix' => '<div class="submit-wrapper-div">',
     ];
@@ -213,7 +215,7 @@ class FormMain extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $connection = \Drupal::service('database');
+    \Drupal::service('database');
     $form_state->setUserInput([]);
     // Inserting the profile picture into DB.
     $profilePic = $form_state->getValue('profilePic');
@@ -226,7 +228,6 @@ class FormMain extends FormBase {
     else {
       $form_state->setValue('profilePic', ['0']);
     }
-
 
     // Inserting the feedback picture into DB.
     $feedbackPic = $form_state->getValue('feedbackPic');
@@ -255,7 +256,7 @@ class FormMain extends FormBase {
       ])
       ->execute();
     // Successful submit message.
-    \Drupal::messenger()->addMessage($this->t('Form submitted!Hooray!'),
+    \Drupal::messenger()->addMessage($this->t('Form submitted'),
       'status', TRUE);
   }
 
