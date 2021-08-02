@@ -130,7 +130,7 @@ class FirstPageController extends ControllerBase {
     return [
       '#theme'   => 'guest_list',
       '#form'    => $form,
-      '#content' => $data,
+      '#content' => empty($data) ? '' : $data,
       '#getDest' => $let,
     ];
 
