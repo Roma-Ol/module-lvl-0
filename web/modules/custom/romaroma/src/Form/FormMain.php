@@ -9,9 +9,6 @@ use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
 
-// @todo check doubletap.
-// @todo display block- table on phone.
-
 /**
  * Class FormMain.
  *

@@ -188,10 +188,18 @@
 
 
 @media (max-width: 600px) {
-  .table-wrapper-first{
-    .table-wrapper-second{
-      .db-table-content{
-        display: block;
+  .guestbook-page-wrapper{
+    .table-wrapper-first{
+      .table-wrapper-second{
+        .db-table-content{
+          display: block;
+          .profile-author-info-block {
+            .profile-pic{
+              display: flex;
+              justify-content: center;
+            }
+          }
+        }
       }
     }
   }
