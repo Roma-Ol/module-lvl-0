@@ -10,3 +10,6 @@ Please, follow the instruction above in order to open the project correctly.
 8.  $ fin drush cr        		   	   // Clear the cache.
 9.  Follow http:module-lvl-0.docksal/romaroma/guestbook
 10. Enjoy           			   	   // The most important part.
+
+PS:
+I've putted the default records to database in order to demonstrate the styling and functionality of the module.
