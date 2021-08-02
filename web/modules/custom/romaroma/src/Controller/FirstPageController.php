@@ -4,6 +4,7 @@ namespace Drupal\romaroma\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\file\Entity\File;
+use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -65,6 +66,7 @@ class FirstPageController extends ControllerBase {
    * Telling what to return.
    */
   public function report() {
+    \Drupal::service('page_cache_kill_switch')->trigger();
     // Building the form.
     $form = $this->build();
 
@@ -73,6 +75,7 @@ class FirstPageController extends ControllerBase {
       // Getting the profile picture info.
       $profilePic         = file::load($row->profilePic);
       $profilePicVariable = [];
+      $profilePicUrl      = '';
       if (!($profilePic == NULL)) {
         $profilePicUri      = $profilePic->getFileUri();
         $profilePicVariable = [
@@ -81,18 +84,24 @@ class FirstPageController extends ControllerBase {
           '#alt'   => 'Profile picture',
           '#title' => 'Profile picture',
         ];
+        $profilePicUrl      = file_url_transform_relative(Url::fromUri(file_create_url($profilePicUri))
+          ->toString());
       }
 
       // Getting the feedback picture info.
       $feedbackPic         = file::load($row->feedbackPic);
       $feedbackPicVariable = [];
+      $feedbackPicUrl      = '';
       if (!($feedbackPic == NULL)) {
+        $feedbackPicUri      = $feedbackPic->getFileUri();
         $feedbackPicVariable = [
           '#theme' => 'image',
-          '#uri'   => file::load($row->feedbackPic)->getFileUri(),
+          '#uri'   => $feedbackPicUri,
           '#alt'   => 'Feedback picture',
           '#title' => 'Feedback picture',
         ];
+        $feedbackPicUrl      = file_url_transform_relative(Url::fromUri(file_create_url($feedbackPicUri))
+          ->toString());
       }
 
       // Putting all the data we need into one variable.
@@ -105,20 +114,22 @@ class FirstPageController extends ControllerBase {
         'created'     => $row->created,
         'profilePic'  => [
           'data' => $profilePicVariable,
+          'url'  => $profilePicUrl,
         ],
         'feedbackPic' => [
           'data' => $feedbackPicVariable,
+          'url'  => $feedbackPicUrl,
         ],
       ];
     }
 
     $value = $this->getDestinationArray();
-    $let = $value["destination"];
+    $let   = $value["destination"];
 
     // Rendering the data we need.
     return [
       '#theme'   => 'guest_list',
-      '#form'       => $form,
+      '#form'    => $form,
       '#content' => $data,
       '#getDest' => $let,
     ];

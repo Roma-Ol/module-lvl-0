@@ -13,7 +13,9 @@
                     <div class="profile-author-info-block">
                         <div class="profile-pic">
                             {% if i.profilePic.data %}
-                                    {{ i.profilePic }}
+                                <a data-fslightbox="gallery" href="{{ i.profilePic.url }}">
+                                    <img src="{{ i.profilePic.url }}" alt="img">
+                                </a>
                             {% else %}
                                     <img src="/modules/custom/romaroma/media/defaultImage.jpg" alt="xz">
                             {% endif %}
@@ -34,13 +36,18 @@
 
                                 <a href="tel:{{ i.phone }}">{{ i.phone }}</a>
                             </div>
-                            <div class="interact-buttons">
-                                <div class="button-wrapper-div">
-                                    <a href='/romaroma/EditGuest/{{ i.id }}' class="db-table-button db-table-button-edit use-ajax" data-dialog-type="modal">Edit this guest</a>
-                                </div>
-                                <div class="button-wrapper-div">
-                                    <a href='/romaroma/deleteGuest/{{ i.id }}' class="db-table-button db-table-button-delete use-ajax" data-dialog-type="modal">Delete this guest</a>
-                                </div>
+
+                            <div class="administerButtons">
+                                {% if user.hasPermission('administer nodes') %}
+                                    <div class="interact-buttons">
+                                        <div class="button-wrapper-div">
+                                            <a href='/romaroma/EditGuest/{{ i.id }}' class="db-table-button db-table-button-edit use-ajax" data-dialog-type="modal">Edit this guest</a>
+                                        </div>
+                                        <div class="button-wrapper-div">
+                                            <a href='/romaroma/deleteGuest/{{ i.id }}' class="db-table-button db-table-button-delete use-ajax" data-dialog-type="modal">Delete this guest</a>
+                                        </div>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -50,7 +57,11 @@
                                 {{ i.feedback }}
                             </div>
                             <div class="feedbackPic">
-                                {{ i.feedbackPic }}
+                                {% if i.feedbackPic.data %}
+                                    <a data-fslightbox="gallery" href="{{ i.feedbackPic.url }}">
+                                        <img src="{{ i.feedbackPic.url }}" alt="img">
+                                    </a>
+                                {% endif %}
                             </div>
                             <div class="feedback-date-wrapper">
                                 <div class="feedback-date">

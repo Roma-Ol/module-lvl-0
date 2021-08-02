@@ -2,11 +2,15 @@
 
 namespace Drupal\romaroma\Form;
 
+use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
+
+// @todo check doubletap.
+// @todo display block- table on phone.
 
 /**
  * Class FormMain.
@@ -69,7 +73,7 @@ class FormMain extends FormBase {
     $form['phone']                 = [
       '#type'        => 'textfield',
       '#title'       => t('Phone number:'),
-      '#description' => $this->t('+XXX XX XXX XX XX'),
+      '#description' => $this->t('XXX XX XXX XX XX'),
       '#placeholder' => 'Phone number:',
       '#required'    => TRUE,
       '#ajax'        => [
@@ -150,7 +154,7 @@ class FormMain extends FormBase {
     }
 
     // Phone validation.
-    if (!preg_match('/[+0-9]{4} [0-9]{3} [0-9]{3} [0-9]{2} [0-9]{2}/', $phoneValue)) {
+    if (!preg_match('/[0-9]{3} [0-9]{3} [0-9]{3} [0-9]{2} [0-9]{2}/', $phoneValue)) {
       $form_state->setErrorByName('phone', t('Phone is not valid.'));
     }
   }
@@ -196,7 +200,7 @@ class FormMain extends FormBase {
   }
 
   /**
-   * Email AJAX validation.
+   * Phone AJAX validation.
    */
   public function validatePhoneAjax(array &$form, FormStateInterface $form_state) {
     $response   = new AjaxResponse();
